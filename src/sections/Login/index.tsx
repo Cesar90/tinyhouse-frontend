@@ -85,9 +85,9 @@ export const Login = ({ setViewer }: Props) => {
             <Card className="log-in-card">
                 <div className="log-in-card__intro">
                     <Title level={3} className="log-in-card__intro-title">
-                        <span role="img" arial-label="wave">
+                        {/* <span role="img" arial-label="wave">
                         👋
-                        </span>
+                        </span> */}
                     </Title>
                     <Title level={3} className="log-in-card__intro-title">
                         <span role="img" arial-label="wave">

@@ -33,18 +33,6 @@
     "codegen:schema": "npx apollo client:download-schema --endpoint=http://localhost:9000/api",
     "codegen:generate": "npx apollo client:codegen --localSchemaFile=schema.json --includes=src/**/*.ts --globalTypesFile=./src/lib/graphql/globalTypes.ts --target=typescript"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "proxy": "http://localhost:9000",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.0",

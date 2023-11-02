@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import { RouteComponentProps } from "react-router-dom"
 import { useQuery } from '@apollo/react-hooks'
-import { Affix, Layout, List, Typography } from "antd"
+import { Layout, List, Typography } from "antd"
 import { ErrorBanner, ListingCard } from '../../lib/components'
 import { LISTINGS } from '../../lib/graphql/queries'
 import { Listings as ListingData, ListingsVariables 
@@ -15,7 +15,7 @@ interface MatchParms{
 }
 
 const { Content } = Layout
-const { Paragraph, Text, Title } = Typography
+const { Paragraph, Title } = Typography
 const PAGE_LIMIT = 8
 
 export const Listings = ({ match }: RouteComponentProps<MatchParms> ) => {
