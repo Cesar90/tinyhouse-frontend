@@ -1,0 +1,424 @@
+select 
+	title,
+	rental_duration,
+	(rental_duration * 24) + 1 as "rental duration (hrs)"
+from film;
+
+select 
+	3 * 3 as "multiplication",
+	6 + 6 as "addition",
+	1 - 1 as "subtraction",
+	10 / 2 as "divi";
+
+select rental_date, return_date, return_date - rental_date as "duration"
+from rental;
+
+select 
+	first_name, 
+	last_name, 
+	initcap(first_name || ' ' || last_name) as "Full Name" 
+	from customer c;
+
+select title, rental_duration from film f
+where rental_duration != 5;
+
+-- =, < >, <=, >=, != or <>
+
+select * from rental;
+
+select * from customer c
+where lower(first_name) <> 'MARY';
+
+select *
+from rental
+where rental_date >= '2006-01-01';
+
+select *
+from rental;
+
+select title, rental_duration, length
+from film
+where (length > 100 or rental_duration =5)
+	or left(title, 1) = 'A';
+
+select title, rental_duration, length
+from film
+where not rental_duration  = 5;
+
+select *
+from customer
+where email is not null;
+
+select title, rating
+from film where rating != 'PG'
+	or rating is null;
+
+select customer_id
+from customer
+where customer_id between 1 and 5;
+
+select customer_id
+from customer
+where customer_id not in (1,5,8)
+
+select first_name
+from customer
+where left(first_name, 1) in ('A','F','J');
+
+select first_name
+from customer
+where first_name like '__M%';
+
+select first_name
+from customer
+where first_name similar to 'M%L{2}%';
+
+select title, length
+from film
+where length is not null
+order by length DESC;
+
+select title, length
+from film
+order by length desc nulls last;
+
+select title, length
+from film f 
+order by length desc, title asc;
+
+select title, length
+from film
+order by right(title, 1), length desc;
+
+select
+	title,
+	rental_rate,
+	replacement_cost,
+	ceil(replacement_cost / rental_rate) as break_even
+from film
+-- where break_even > 20
+where ceil(replacement_cost / rental_rate)
+order by break_even desc;
+
+/*
+ from: pick the tables to be queried
+ where: filter the rows
+ group by: aggregate rows
+ having: filter the aggregate
+ select: select the columns that appear in the output
+ order by: sort the rows
+ limit: limit the number of returned rows
+ * */
+
+select first_name, last_name
+from customer c
+order by first_name 
+offset 10 rows fetch next 5 rows only;
+
+select distinct customer_id from payment p;
+
+select distinct customer_id, staff_id
+from payment p 
+where customer_id = 269;
+
+select distinct 
+	date_part('month', payment_date) as month,
+	date_part('year', payment_date) as year
+from payment p 
+order by year, month desc
+
+select title, length,
+	case
+		when length <= 60 then 'short'
+		when length > 60 and length <= 120 then 'long'
+		when length > 120 then 'very long'
+		else 'unknown'
+	end as length_description
+from film;
+
+select title, length, rating,
+	case rating
+		when 'G' then 'kid friendly'
+		when 'PG' then 'kid friendly'
+		--when rating is null then ''
+		else 'not kid friendly'
+	end as kid_friendly_rating
+from film;
+
+-- count, sum, min, max, avg
+
+select count(length) from film f;
+
+select count(*)
+from film f 
+where length is null;
+
+select count(distinct rating)
+from film f;
+
+select distinct rating
+from film f;
+
+select rating, count(*)
+from film
+group by rating
+having count(*) > 4
+
+select customer_id, staff_id, count(*)
+from payment
+group by customer_id, staff_id 
+having count(*) > 20
+order by customer_id, staff_id;
+
+select left(first_name, 1) as first_letter, count(*)
+from customer
+group by left(first_name, 1)
+order by first_letter;
+
+select
+	case
+		when length < 60 then 'short'
+		when length between 60 and 120 then 'medium'
+		when length > 120 then 'long'
+		else 'short'
+  	end,
+  	count(*)
+from film
+group by
+  case
+	when length < 60 then 'short'
+	when length between 60 and 120 then 'medium'
+	when length > 120 then 'long'
+	else 'short'
+  end
+  
+ select
+	case
+		when length < 60 then 'short'
+		when length between 60 and 120 then 'medium'
+		when length > 120 then 'long'
+		else 'short'
+  	end,
+  	count(*)
+from film
+group by 1;
+
+
+select 
+	sum(case when rating in ('R','NC-17') then 1 else 0 end) as adult_films,
+	count(*) as totaselect 
+	title,
+	rental_duration,
+	(rental_duration * 24) + 1 as "rental duration (hrs)"
+from film;
+
+select 
+	3 * 3 as "multiplication",
+	6 + 6 as "addition",
+	1 - 1 as "subtraction",
+	10 / 2 as "divi";
+
+select rental_date, return_date, return_date - rental_date as "duration"
+from rental;
+
+select 
+	first_name, 
+	last_name, 
+	initcap(first_name || ' ' || last_name) as "Full Name" 
+	from customer c;
+
+select title, rental_duration from film f
+where rental_duration != 5;
+
+-- =, < >, <=, >=, != or <>
+
+select * from rental;
+
+select * from customer c
+where lower(first_name) <> 'MARY';
+
+select *
+from rental
+where rental_date >= '2006-01-01';
+
+select *
+from rental;
+
+select title, rental_duration, length
+from film
+where (length > 100 or rental_duration =5)
+	or left(title, 1) = 'A';
+
+select title, rental_duration, length
+from film
+where not rental_duration  = 5;
+
+select *
+from customer
+where email is not null;
+
+select title, rating
+from film where rating != 'PG'
+	or rating is null;
+
+select customer_id
+from customer
+where customer_id between 1 and 5;
+
+select customer_id
+from customer
+where customer_id not in (1,5,8)
+
+select first_name
+from customer
+where left(first_name, 1) in ('A','F','J');
+
+select first_name
+from customer
+where first_name like '__M%';
+
+select first_name
+from customer
+where first_name similar to 'M%L{2}%';
+
+select title, length
+from film
+where length is not null
+order by length DESC;
+
+select title, length
+from film
+order by length desc nulls last;
+
+select title, length
+from film f 
+order by length desc, title asc;
+
+select title, length
+from film
+order by right(title, 1), length desc;
+
+select
+	title,
+	rental_rate,
+	replacement_cost,
+	ceil(replacement_cost / rental_rate) as break_even
+from film
+-- where break_even > 20
+where ceil(replacement_cost / rental_rate)
+order by break_even desc;
+
+/*
+ from: pick the tables to be queried
+ where: filter the rows
+ group by: aggregate rows
+ having: filter the aggregate
+ select: select the columns that appear in the output
+ order by: sort the rows
+ limit: limit the number of returned rows
+ * */
+
+select first_name, last_name
+from customer c
+order by first_name 
+offset 10 rows fetch next 5 rows only;
+
+select distinct customer_id from payment p;
+
+select distinct customer_id, staff_id
+from payment p 
+where customer_id = 269;
+
+select distinct 
+	date_part('month', payment_date) as month,
+	date_part('year', payment_date) as year
+from payment p 
+order by year, month desc
+
+select title, length,
+	case
+		when length <= 60 then 'short'
+		when length > 60 and length <= 120 then 'long'
+		when length > 120 then 'very long'
+		else 'unknown'
+	end as length_description
+from film;
+
+select title, length, rating,
+	case rating
+		when 'G' then 'kid friendly'
+		when 'PG' then 'kid friendly'
+		--when rating is null then ''
+		else 'not kid friendly'
+	end as kid_friendly_rating
+from film;
+
+-- count, sum, min, max, avg
+
+select count(length) from film f;
+
+select count(*)
+from film f 
+where length is null;
+
+select count(distinct rating)
+from film f;
+
+select distinct rating
+from film f;
+
+select rating, count(*)
+from film
+group by rating
+having count(*) > 4
+
+select customer_id, staff_id, count(*)
+from payment
+group by customer_id, staff_id 
+having count(*) > 20
+order by customer_id, staff_id;
+
+select left(first_name, 1) as first_letter, count(*)
+from customer
+group by left(first_name, 1)
+order by first_letter;
+
+select
+	case
+		when length < 60 then 'short'
+		when length between 60 and 120 then 'medium'
+		when length > 120 then 'long'
+		else 'short'
+  	end,
+  	count(*)
+from film
+group by
+  case
+	when length < 60 then 'short'
+	when length between 60 and 120 then 'medium'
+	when length > 120 then 'long'
+	else 'short'
+  end
+  
+ select
+	case
+		when length < 60 then 'short'
+		when length between 60 and 120 then 'medium'
+		when length > 120 then 'long'
+		else 'short'
+  	end,
+  	count(*)
+from film
+group by 1;
+
+
+select 
+	sum(case when rating in ('R','NC-17') then 1 else 0 end) as adult_films,
+	count(*) as total_films,
+	100.0 * sum(case when rating in ('R','NC-17') then 1 else 0 end) / count(*) as pct
+from film;
+
+l_films,
+	100.0 * sum(case when rating in ('R','NC-17') then 1 else 0 end) / count(*) as pct
+from film;
+

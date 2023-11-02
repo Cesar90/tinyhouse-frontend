@@ -1,0 +1,9 @@
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"posting": 9}' \
+    https://applybyapi.com/gentoken/
+
+curl -i -H "Content-Type: multipart/form-data" -F token="GATKWP348PZ7ON4HWDIT" -F name="Cesar Cordero" -F email="ccordero.007@gmail.com"  -F 'file=@/Users/cesarcordero/Downloads/cesarcordero.pdf' https://applybyapi.com/apply/
+
+$ sudo curl -F name="john" -F password="abc" -F files=@"path/to/file" -F http://localhost/api/test
+
+/Users/cesarcordero/Downloads

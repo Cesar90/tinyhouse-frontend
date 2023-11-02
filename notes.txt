@@ -1,0 +1,2 @@
+To generate schema => npm run codegen:schema
+To generate json => npm run codegen:generate
