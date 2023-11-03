@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+// import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom' 
 import ApolloClient from "apollo-boost"
 import { ApolloProvider, useMutation } from '@apollo/react-hooks';
 import { StripeProvider, Elements } from "react-stripe-elements";
-import { Layout,Spin, Affix } from 'antd'
+// import { Layout,Spin, Affix } from 'antd'
+import { Layout, Affix } from 'antd'
 import {
     AppHeader,
     Home, 
@@ -15,7 +17,7 @@ import {
     NotFound,
     Stripe, 
     User} from "./sections";
-import { AppHeaderSkeleton } from "./lib/components";
+// import { AppHeaderSkeleton } from "./lib/components";
 import { LOG_IN } from "./lib/graphql/mutations/LogIn";
 import { LogIn as LogInData, LogInVariables } from "./lib/graphql/mutations/LogIn/__generated__/LogIn"
 import { Viewer } from './lib/types'
@@ -24,7 +26,7 @@ import "./styles/index.css"
 import { ErrorBanner } from "./lib/components/ErrorBanner"
 
 const client = new ApolloClient({
-    uri: "/api",
+    uri: "https://tinyhouse-backend.vercel.app/api",
     request: async operation => {
         const token = sessionStorage.getItem("token")
         operation.setContext({
@@ -46,7 +48,8 @@ const initialViewer: Viewer ={
 const App = () => {
     const [viewer, setViewer] = useState<Viewer>(initialViewer)
     // console.log(viewer) //Check the console to see viewer details after logging in
-    const [logIn, {error} ] = useMutation<LogInData, LogInVariables>(LOG_IN, {
+    // const [logIn, {error} ] = useMutation<LogInData, LogInVariables>(LOG_IN, {
+    const [, {error} ] = useMutation<LogInData, LogInVariables>(LOG_IN, {
         onCompleted: data => {
             if(data && data.logIn){
                 // console.log("onClompletedHere", data)
@@ -62,23 +65,24 @@ const App = () => {
         }
     })
 
-    const logInRef = useRef(logIn)
-    useEffect(() => {
-        logInRef.current()
-    }, [])
+    // const logInRef = useRef(logIn)
+    // useEffect(() => {
+    //     logInRef.current()
+    // }, [])
     
 
-    if(!viewer.didRequest && !error){
-        return (
-            <Layout className="app-skeleton">
-                <AppHeaderSkeleton />
-                <div className="app-skeleton__spin-section">
-                    <Spin size="large" tip="Launching Tinyhouse" />
-                </div>
-            </Layout>
-        )
-    }
-
+    // if(!viewer.didRequest && !error){
+    //     return (
+    //         <Layout className="app-skeleton">
+    //             <AppHeaderSkeleton />
+    //             <div className="app-skeleton__spin-section">
+    //                 <Spin size="large" tip="Launching Tinyhouse" />
+    //             </div>
+    //         </Layout>
+    //     )
+    // }
+    
+    console.log(error)
     const logInErrorBannerElement = error ? <ErrorBanner description="We weren't able to verify if you were logged in. Please try again later!" /> : null
 
     return (
