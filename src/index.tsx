@@ -26,7 +26,7 @@ import "./styles/index.css"
 import { ErrorBanner } from "./lib/components/ErrorBanner"
 
 const client = new ApolloClient({
-    uri: "https://tinyhouse-backend.vercel.app/api",
+    uri: "https://cesar-tinyhouse-backend.vercel.app/api",
     request: async operation => {
         const token = sessionStorage.getItem("token")
         operation.setContext({
